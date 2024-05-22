@@ -123,9 +123,6 @@ public abstract class Artigo implements Serializable {
      * }
      */
 
-    public void setPreco_atual(float preco_atual) {
-        // this.preco_atual = preco_atual;
-    }
 
     public void setNovo(boolean novo) {
         this.novo = novo;
@@ -207,24 +204,26 @@ public abstract class Artigo implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this)
+        if (this == obj)
             return true;
         if (obj == null || this.getClass() != obj.getClass())
             return false;
 
         Artigo a = (Artigo) obj;
 
-        return (this.codigo_barras.equals(a.getCodigo_barras()) && this.descricao.equals(a.getDescricao())
-                && this.descricao.equals(a.getMarca()) && this.preco_base == a.getPreco_base()
-                && this.novo == a.getNovo() && this.estado_uso == a.getEstado_uso()
-                && this.n_utilizadores == a.getN_utilizadores() && this.idVendedor == a.getIdVendedor()
+        return this.codigo_barras.equals(a.getCodigo_barras())
+                && this.descricao.equals(a.getDescricao())
+                && this.marca.equals(a.getMarca())
+                && Double.compare(this.preco_base, a.getPreco_base()) == 0
+                && this.novo == a.getNovo()
+                && this.estado_uso == a.getEstado_uso()
+                && this.n_utilizadores == a.getN_utilizadores()
+                && this.idVendedor == a.getIdVendedor()
                 && this.idTransportadora == a.getIdTransportadora()
                 && this.disponivel == a.getDisponivel()
-                && this.data_venda.equals(a.getData_venda()));
-        // return (this.codigo_barras == ((Artigo) obj).getCodigo_barras());
-        // this.preco_base == a.getPreco_atual()
+                && this.data_venda.equals(a.getData_venda());
+}
 
-    }
 
     @Override
     public String toString() {

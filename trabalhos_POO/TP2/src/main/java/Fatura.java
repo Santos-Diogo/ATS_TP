@@ -143,10 +143,12 @@ public class Fatura implements Serializable {
 
         return (this.id == f.getId() && this.compra == f.isCompra() && this.idEncomenda == f.getIdEncomenda()
                 && this.nifComprador == f.getNifComprador()
-                && this.artigos.equals(f.getArtigos()) && this.custoProdutos == f.getCustoProdutos()
-                && this.alteracaoPreco == f.getAlteracaoPreco()
-                && this.precoFinal == f.getPrecoFinal());
+                && this.artigos.equals(f.getArtigos()) && Double.compare(this.custoProdutos, f.getCustoProdutos()) == 0
+                && Double.compare(this.alteracaoPreco, f.getAlteracaoPreco()) == 0
+                && Double.compare(this.precoFinal, f.getPrecoFinal()) == 0);
     }
+
+    
 
     @Override
     public String toString() {
