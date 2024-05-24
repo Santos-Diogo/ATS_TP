@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-22-openjdk/lib"/>
-    <property name="sun.java.command" value="/home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/target/surefire/surefirebooter-20240524160007889_3.jar /home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/target/surefire 2024-05-24T16-00-07_848-jvmRun1 surefire-20240524160007889_1tmp surefire_0-20240524160007889_2tmp"/>
+    <property name="sun.java.command" value="/home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/target/surefire/surefirebooter-20240524160736307_3.jar /home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/target/surefire 2024-05-24T16-07-36_264-jvmRun1 surefire-20240524160736307_1tmp surefire_0-20240524160736307_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/target/test-classes:/home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/target/classes:/home/samba/.m2/repository/org/jetbrains/annotations/24.0.1/annotations-24.0.1.jar:/home/samba/.m2/repository/net/objecthunter/exp4j/0.4.8/exp4j-0.4.8.jar:/home/samba/.m2/repository/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar:/home/samba/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar:/home/samba/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/samba/.m2/repository/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar:/home/samba/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/samba/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.8.1/junit-jupiter-params-5.8.1.jar:/home/samba/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar:/home/samba/.m2/repository/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar:/home/samba/.m2/repository/org/mockito/mockito-core/4.2.0/mockito-core-4.2.0.jar:/home/samba/.m2/repository/net/bytebuddy/byte-buddy/1.12.4/byte-buddy-1.12.4.jar:/home/samba/.m2/repository/net/bytebuddy/byte-buddy-agent/1.12.4/byte-buddy-agent-1.12.4.jar:/home/samba/.m2/repository/org/objenesis/objenesis/3.2/objenesis-3.2.jar:/home/samba/.m2/repository/org/mockito/mockito-junit-jupiter/4.2.0/mockito-junit-jupiter-4.2.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/target/surefire/surefirebooter-20240524160007889_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/target/surefire/surefirebooter-20240524160736307_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="22"/>
     <property name="user.name" value="samba"/>
@@ -53,5 +53,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="66.0"/>
   </properties>
-  <testcase name="testItemManager" classname="com.marketplace.vintage.item.ItemManagerTest" time="0.001"/>
+  <testcase name="testItemManager" classname="com.marketplace.vintage.item.ItemManagerTest" time="0.002"/>
 </testsuite>
