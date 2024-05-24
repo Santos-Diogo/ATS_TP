@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ItemController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EX1_T_GPT</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage.item</a> &gt; <span class="el_source">ItemController.java</span></div><h1>ItemController.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage.item;
+
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class ItemController {
+
+    private final ItemManager itemManager;
+    private final ItemFactory itemFactory;
+
+<span class="nc" id="L12">    public ItemController(ItemManager itemManager, ItemFactory itemFactory) {</span>
+<span class="nc" id="L13">        this.itemManager = itemManager;</span>
+<span class="nc" id="L14">        this.itemFactory = itemFactory;</span>
+<span class="nc" id="L15">    }</span>
+
+    public int addItemStock(Item item, int stock) {
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        if (stock &lt; 0)</span>
+<span class="nc" id="L19">            throw new IllegalArgumentException(&quot;Stock change cannot be negative.&quot;);</span>
+
+<span class="nc" id="L21">        int newStock = item.getCurrentStock() + stock;</span>
+<span class="nc" id="L22">        item.setCurrentStock(newStock);</span>
+
+<span class="nc" id="L24">        this.itemManager.updateItem(item);</span>
+
+<span class="nc" id="L26">        return newStock;</span>
+    }
+
+    public int removeItemStock(Item item, int stock) {
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        if (stock &lt; 0)</span>
+<span class="nc" id="L31">            throw new IllegalArgumentException(&quot;Stock change cannot be negative.&quot;);</span>
+
+<span class="nc" id="L33">        int newStock = Math.max(0, item.getCurrentStock() - stock);</span>
+<span class="nc" id="L34">        item.setCurrentStock(newStock);</span>
+
+<span class="nc" id="L36">        this.itemManager.updateItem(item);</span>
+
+<span class="nc" id="L38">        return newStock;</span>
+    }
+
+    public boolean itemHasStock(String itemId) {
+<span class="nc" id="L42">        Item item = this.itemManager.getItem(itemId);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        return item.getCurrentStock() &gt; 0;</span>
+    }
+
+    public Item getItem(String id) {
+<span class="nc" id="L47">        return this.itemManager.getItem(id);</span>
+    }
+
+    public void registerItem(Item item) {
+<span class="nc" id="L51">        this.itemManager.registerItem(item);</span>
+<span class="nc" id="L52">    }</span>
+
+    public String generateUniqueCode() {
+<span class="nc" id="L55">        return this.itemManager.generateUniqueCode();</span>
+    }
+
+    public boolean containsItemById(String id) {
+<span class="nc" id="L59">        return this.itemManager.containsItemById(id);</span>
+    }
+
+    public List&lt;Item&gt; getAllItems() {
+<span class="nc" id="L63">        return this.itemManager.getAllItems();</span>
+    }
+
+    public Item createItem(UUID ownerUuid, String alphanumericId, ItemType itemType, Map&lt;ItemProperty, Object&gt; itemProperties) {
+<span class="nc" id="L67">        return this.itemFactory.createItem(ownerUuid, alphanumericId, itemType, itemProperties);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

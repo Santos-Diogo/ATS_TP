@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TopListStatsCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EX1_T_GPT</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage.commands.stats</a> &gt; <span class="el_source">TopListStatsCommand.java</span></div><h1>TopListStatsCommand.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage.commands.stats;
+
+import com.marketplace.vintage.Vintage;
+import com.marketplace.vintage.input.InputPrompter;
+import com.marketplace.vintage.logging.Logger;
+import com.marketplace.vintage.user.User;
+import com.marketplace.vintage.utils.StringUtils;
+import com.marketplace.vintage.utils.VintageDate;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class TopListStatsCommand extends BaseStatsCommand {
+
+    public TopListStatsCommand(Vintage vintage) {
+<span class="nc" id="L17">        super(vintage, &quot;toplist&quot;, &quot;stats toplist (limit) (from) (to)&quot;, 0, &quot;Shows the top list of sellers and buyers in a given date range or all time&quot;);</span>
+<span class="nc" id="L18">    }</span>
+
+    @Override
+    protected void executeSafely(Logger logger, InputPrompter inputPrompter, String[] args) {
+<span class="nc" id="L22">        int limit = 5;</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        if (args.length &gt; 0) {</span>
+            try {
+<span class="nc" id="L25">                limit = Integer.parseInt(args[0]);</span>
+<span class="nc" id="L26">            } catch (NumberFormatException e) {</span>
+<span class="nc" id="L27">                logger.warn(&quot;Couldn't parse list limit from '&quot; + args[0] + &quot;'.&quot;);</span>
+<span class="nc" id="L28">                return;</span>
+<span class="nc" id="L29">            }</span>
+        }
+
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (limit &lt; 1) {</span>
+<span class="nc" id="L33">            logger.warn(&quot;List limit must be greater than 0.&quot;);</span>
+<span class="nc" id="L34">            return;</span>
+        }
+
+<span class="nc" id="L37">        Predicate&lt;VintageDate&gt; datePredicate = getDatePredicate(args, 1);</span>
+
+<span class="nc" id="L39">        List&lt;User&gt; topBuyers = getVintage().getTopBuyers(limit, datePredicate);</span>
+<span class="nc" id="L40">        List&lt;User&gt; topSellers = getVintage().getTopSellers(limit, datePredicate);</span>
+
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (topBuyers.isEmpty()) {</span>
+<span class="nc" id="L43">            logger.warn(&quot;No buyers found in the specified date range.&quot;);</span>
+        } else {
+<span class="nc" id="L45">            logger.info(&quot;Top &quot; + limit + &quot; buyers in specified date range:&quot;);</span>
+<span class="nc" id="L46">            int i = 1;</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">            for (User buyer : topBuyers) {</span>
+<span class="nc" id="L48">                BigDecimal spent = getVintage().getMoneySpentByUserInDatePredicate(buyer, datePredicate);</span>
+<span class="nc" id="L49">                logger.info(&quot; #&quot; + i + &quot; &quot; + buyer.getName() + &quot; - &quot; + StringUtils.formatCurrency(spent));</span>
+<span class="nc" id="L50">                i++;</span>
+<span class="nc" id="L51">            }</span>
+        }
+
+<span class="nc" id="L54">        logger.info();</span>
+
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (topSellers.isEmpty()) {</span>
+<span class="nc" id="L57">            logger.warn(&quot;No sellers found in the specified date range.&quot;);</span>
+        } else {
+<span class="nc" id="L59">            logger.info(&quot;Top &quot; + limit + &quot; sellers in specified date range:&quot;);</span>
+<span class="nc" id="L60">            int i = 1;</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">            for (User seller : topSellers) {</span>
+<span class="nc" id="L62">                BigDecimal salesMoney = getVintage().getMoneyFromUserSalesByDatePredicate(seller, datePredicate);</span>
+<span class="nc" id="L63">                logger.info(&quot; #&quot; + i + &quot; &quot; + seller.getName() + &quot; - &quot; + StringUtils.formatCurrency(salesMoney));</span>
+<span class="nc" id="L64">                i++;</span>
+<span class="nc" id="L65">            }</span>
+        }
+
+
+<span class="nc" id="L69">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

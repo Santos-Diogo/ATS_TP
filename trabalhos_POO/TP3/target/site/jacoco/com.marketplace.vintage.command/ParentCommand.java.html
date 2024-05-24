@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParentCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EX1_T_GPT</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage.command</a> &gt; <span class="el_source">ParentCommand.java</span></div><h1>ParentCommand.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage.command;
+
+import com.marketplace.vintage.commands.HelpCommand;
+import com.marketplace.vintage.input.InputPrompter;
+import com.marketplace.vintage.logging.Logger;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ParentCommand implements CommandRepository, Command {
+
+    private final Map&lt;String, Command&gt; subCommands;
+    private final String name;
+    private final String fullName;
+    private final String description;
+    private final HelpCommand helpCommand;
+
+    public ParentCommand(ParentCommand parent, String name, String description) {
+<span class="nc" id="L21">        this(parent.getFullName() + &quot; &quot; + name, name, description);</span>
+<span class="nc" id="L22">    }</span>
+
+    public ParentCommand(String name, String description) {
+<span class="nc" id="L25">        this(name, name, description);</span>
+<span class="nc" id="L26">    }</span>
+
+<span class="nc" id="L28">    private ParentCommand(String fullName, String name, String description) {</span>
+<span class="nc" id="L29">        this.name = name;</span>
+<span class="nc" id="L30">        this.fullName = fullName;</span>
+<span class="nc" id="L31">        this.description = description;</span>
+<span class="nc" id="L32">        this.subCommands = new HashMap&lt;&gt;();</span>
+
+<span class="nc" id="L34">        this.helpCommand = new HelpCommand(this, getFullName() + &quot; help&quot;, getFullName());</span>
+<span class="nc" id="L35">        this.registerSubCommand(helpCommand);</span>
+<span class="nc" id="L36">    }</span>
+
+    @Override
+    public void execute(Logger logger, InputPrompter inputPrompter, String[] args) {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (args.length == 0) {</span>
+<span class="nc" id="L41">            helpCommand.execute(logger, inputPrompter, args);</span>
+<span class="nc" id="L42">            return;</span>
+        }
+
+<span class="nc" id="L45">        String subCommandName = args[0];</span>
+<span class="nc" id="L46">        Command subCommand = this.subCommands.get(subCommandName);</span>
+
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (subCommand == null) {</span>
+<span class="nc" id="L49">            logger.warn(&quot;Unknown subcommand: &quot; + subCommandName + &quot; (type '&quot; + this.getFullName() + &quot; help' for a list of commands)&quot;);</span>
+<span class="nc" id="L50">            return;</span>
+        }
+
+<span class="nc" id="L53">        String[] subCommandArgs = new String[args.length - 1];</span>
+<span class="nc" id="L54">        System.arraycopy(args, 1, subCommandArgs, 0, subCommandArgs.length);</span>
+
+<span class="nc" id="L56">        subCommand.execute(logger, inputPrompter, subCommandArgs);</span>
+<span class="nc" id="L57">    }</span>
+
+    private void registerSubCommand(Command command) {
+<span class="nc" id="L60">        this.subCommands.put(command.getName().toLowerCase(), command);</span>
+<span class="nc" id="L61">    }</span>
+
+    @Override
+    public String getName() {
+<span class="nc" id="L65">        return this.name;</span>
+    }
+
+    @Override
+    public String getUsage() {
+<span class="nc" id="L70">        return getFullName() + &quot; &lt;subcommand&gt;&quot;;</span>
+    }
+
+    @Override
+    public int getMinArgs() {
+<span class="nc" id="L75">        return 1;</span>
+    }
+
+    @Override
+    public String getDescription() {
+<span class="nc" id="L80">        return this.description;</span>
+    }
+
+    @Override
+    public void registerCommand(Command command) {
+<span class="nc" id="L85">        this.registerSubCommand(command);</span>
+<span class="nc" id="L86">    }</span>
+
+    @Override
+    public Command getCommand(String name) {
+<span class="nc" id="L90">        return this.subCommands.get(name.toLowerCase());</span>
+    }
+
+    @Override
+    public List&lt;Command&gt; getRegisteredCommands() {
+<span class="nc" id="L95">        return new ArrayList&lt;&gt;(this.subCommands.values());</span>
+    }
+
+    public String getFullName() {
+<span class="nc" id="L99">        return fullName;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

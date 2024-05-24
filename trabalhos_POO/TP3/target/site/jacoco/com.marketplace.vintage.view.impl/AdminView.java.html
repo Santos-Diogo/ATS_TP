@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdminView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EX1_T_GPT</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage.view.impl</a> &gt; <span class="el_source">AdminView.java</span></div><h1>AdminView.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage.view.impl;
+
+import com.marketplace.vintage.VintageConstants;
+import com.marketplace.vintage.Vintage;
+import com.marketplace.vintage.commands.carrier.ParcelCarrierCommand;
+import com.marketplace.vintage.commands.item.AdminItemCommand;
+import com.marketplace.vintage.commands.order.AdminOrderCommand;
+import com.marketplace.vintage.commands.stats.StatsCommand;
+import com.marketplace.vintage.commands.time.AdminTimeCommand;
+import com.marketplace.vintage.commands.user.UserCommandAdminView;
+import com.marketplace.vintage.input.InputPrompter;
+import com.marketplace.vintage.logging.Logger;
+import com.marketplace.vintage.view.BaseView;
+
+public class AdminView extends BaseView {
+    public AdminView(Logger logger, InputPrompter inputPrompter, Vintage vintage) {
+<span class="nc" id="L17">        super(logger, inputPrompter, &quot;admin view&quot;);</span>
+
+<span class="nc" id="L19">        getCommandManager().registerCommand(new UserCommandAdminView(vintage));</span>
+<span class="nc" id="L20">        getCommandManager().registerCommand(new ParcelCarrierCommand(vintage,</span>
+                VintageConstants.DEFAULT_EXPEDITION_PRICE_EXPRESSION_STRING,
+                VintageConstants.DEFAULT_EXPEDITION_PRICE_EXPRESSION_VARIABLES));
+<span class="nc" id="L23">        getCommandManager().registerCommand(new AdminTimeCommand(vintage));</span>
+<span class="nc" id="L24">        getCommandManager().registerCommand(new StatsCommand(vintage));</span>
+<span class="nc" id="L25">        getCommandManager().registerCommand(new AdminOrderCommand(vintage));</span>
+<span class="nc" id="L26">        getCommandManager().registerCommand(new AdminItemCommand(vintage));</span>
+<span class="nc" id="L27">    }</span>
+
+    @Override
+    public void run() {
+<span class="nc" id="L31">        getLogger().info(&quot;Admin Control View - Type 'help' to see available commands&quot;);</span>
+<span class="nc" id="L32">        super.run();</span>
+<span class="nc" id="L33">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

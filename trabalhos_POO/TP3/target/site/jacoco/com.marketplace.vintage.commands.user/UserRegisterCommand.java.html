@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserRegisterCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EX1_T_GPT</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage.commands.user</a> &gt; <span class="el_source">UserRegisterCommand.java</span></div><h1>UserRegisterCommand.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage.commands.user;
+
+import com.marketplace.vintage.Vintage;
+import com.marketplace.vintage.command.BaseCommand;
+import com.marketplace.vintage.input.InputMapper;
+import com.marketplace.vintage.input.InputPrompter;
+import com.marketplace.vintage.input.questionnaire.Questionnaire;
+import com.marketplace.vintage.input.questionnaire.QuestionnaireAnswers;
+import com.marketplace.vintage.input.questionnaire.QuestionnaireBuilder;
+import com.marketplace.vintage.logging.Logger;
+import com.marketplace.vintage.user.User;
+
+public class UserRegisterCommand extends BaseCommand {
+
+    private final Vintage vintage;
+    private final Questionnaire createUserQuestionnaire;
+
+    public UserRegisterCommand(Vintage vintage) {
+<span class="nc" id="L19">        super(&quot;register&quot;, &quot;user register &lt;email&gt;&quot;, 1, &quot;Register a new user&quot;);</span>
+<span class="nc" id="L20">        this.vintage = vintage;</span>
+
+<span class="nc" id="L22">        this.createUserQuestionnaire = QuestionnaireBuilder.newBuilder()</span>
+<span class="nc" id="L23">                .withQuestion(&quot;username&quot;, &quot;Enter your username:&quot;, username -&gt; {</span>
+<span class="nc" id="L24">                    vintage.validateUsername(username);</span>
+<span class="nc" id="L25">                    return username;</span>
+                })
+<span class="nc" id="L27">                .withQuestion(&quot;name&quot;, &quot;Enter your name:&quot;, InputMapper.STRING)</span>
+<span class="nc" id="L28">                .withQuestion(&quot;address&quot;, &quot;Enter your address:&quot;, InputMapper.STRING)</span>
+<span class="nc" id="L29">                .withQuestion(&quot;taxNumber&quot;, &quot;Enter your tax number:&quot;, InputMapper.STRING)</span>
+<span class="nc" id="L30">                .build();</span>
+<span class="nc" id="L31">    }</span>
+
+    @Override
+    protected void executeSafely(Logger logger, InputPrompter inputPrompter, String[] args) {
+<span class="nc" id="L35">        String email = args[0];</span>
+
+<span class="nc" id="L37">        User user = askUserInfoAndRegister(email, inputPrompter, logger);</span>
+<span class="nc" id="L38">        logger.info(&quot;Registered &quot; + user.getName() + &quot; (&quot; + user.getEmail() + &quot;).&quot;);</span>
+<span class="nc" id="L39">    }</span>
+
+    public User askUserInfoAndRegister(String email, InputPrompter inputPrompter, Logger logger) {
+<span class="nc" id="L42">        QuestionnaireAnswers answers = createUserQuestionnaire.ask(inputPrompter, logger);</span>
+
+<span class="nc" id="L44">        String username = answers.getAnswer(&quot;username&quot;, String.class);</span>
+<span class="nc" id="L45">        String name = answers.getAnswer(&quot;name&quot;, String.class);</span>
+<span class="nc" id="L46">        String address = answers.getAnswer(&quot;address&quot;, String.class);</span>
+<span class="nc" id="L47">        String taxNumber = answers.getAnswer(&quot;taxNumber&quot;, String.class);</span>
+
+<span class="nc" id="L49">        return vintage.createUser(username, email, name, address, taxNumber);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -26,6 +26,6 @@ class ParcelCarrierManagerTest {
         assertEquals("DHL-Deluxe", parcel_carrier_delux.getName());
 
         assertThrowsExactly(EntityNotFoundException.class, () -> parcelCarrierManager.getCarrierByName("UPS"));
-        assertThrowsExactly(EntityAlreadyExistsException.class, () -> parcelCarrierManager.registerParcelCarrier(ParcelCarrierFactory.createNormalParcelCarrier(testName)));
+        assertThrowsExactly(EntityAlreadyExistsException.class, () -> parcelCarrierManager.registerParcelCarrier(ParcelCarrierFactory.createNormalParcelCarrier(testNormal)));
     }
 }

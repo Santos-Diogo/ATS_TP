@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdminTimeJumpCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EX1_T_GPT</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage.commands.time</a> &gt; <span class="el_source">AdminTimeJumpCommand.java</span></div><h1>AdminTimeJumpCommand.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage.commands.time;
+
+import com.marketplace.vintage.Vintage;
+import com.marketplace.vintage.command.BaseCommand;
+import com.marketplace.vintage.input.InputMapper;
+import com.marketplace.vintage.input.InputPrompter;
+import com.marketplace.vintage.logging.Logger;
+import com.marketplace.vintage.utils.VintageDate;
+
+public class AdminTimeJumpCommand extends BaseCommand {
+
+    private final Vintage vintage;
+
+    public AdminTimeJumpCommand(Vintage vintage) {
+<span class="nc" id="L15">        super(&quot;jump&quot;, &quot;time jump &lt;days&gt;&quot;, 1, &quot;Jump the time by the specified number of days&quot;);</span>
+<span class="nc" id="L16">        this.vintage = vintage;</span>
+<span class="nc" id="L17">    }</span>
+
+    @Override
+    protected void executeSafely(Logger logger, InputPrompter inputPrompter, String[] args) {
+        int days;
+        try {
+<span class="nc" id="L23">            days = InputMapper.ofIntRange(1, Integer.MAX_VALUE).apply(args[0]);</span>
+<span class="nc" id="L24">        } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L25">            logger.warn(&quot;Number of days must be a positive integer. Usage: &quot; + getUsage());</span>
+<span class="nc" id="L26">            return;</span>
+<span class="nc" id="L27">        }</span>
+
+<span class="nc" id="L29">        VintageDate beforeDate = vintage.getCurrentDate();</span>
+<span class="nc" id="L30">        VintageDate afterDate = vintage.jumpTime(logger, days);</span>
+
+<span class="nc" id="L32">        logger.info(&quot;Time jumped from &quot; + beforeDate + &quot; to &quot; + afterDate + &quot;.&quot;);</span>
+<span class="nc" id="L33">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

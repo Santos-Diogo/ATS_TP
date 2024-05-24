@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BaseStatsCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EX1_T_GPT</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage.commands.stats</a> &gt; <span class="el_source">BaseStatsCommand.java</span></div><h1>BaseStatsCommand.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage.commands.stats;
+
+import com.marketplace.vintage.Vintage;
+import com.marketplace.vintage.command.BaseCommand;
+import com.marketplace.vintage.utils.VintageDate;
+
+import java.util.function.Predicate;
+
+public abstract class BaseStatsCommand extends BaseCommand {
+
+    private final Vintage vintage;
+
+    public BaseStatsCommand(Vintage vintage, String name, String usage, int minArgs, String description) {
+<span class="nc" id="L14">        super(name, usage, minArgs, description);</span>
+<span class="nc" id="L15">        this.vintage = vintage;</span>
+<span class="nc" id="L16">    }</span>
+
+    protected Vintage getVintage() {
+<span class="nc" id="L19">        return vintage;</span>
+    }
+
+    protected Predicate&lt;VintageDate&gt; getDatePredicate(String[] args) {
+<span class="nc" id="L23">        return getDatePredicate(args, 0);</span>
+    }
+
+    protected Predicate&lt;VintageDate&gt; getDatePredicate(String[] args, int offset) {
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        if (args.length &lt; 2 + offset) {</span>
+<span class="nc" id="L28">            return date -&gt; true;</span>
+        }
+<span class="nc" id="L30">        return date -&gt; date.isBetweenInclusive(VintageDate.fromString(args[offset]), VintageDate.fromString(args[1 + offset]));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

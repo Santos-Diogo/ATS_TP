@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TshirtItem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EX1_T_GPT</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage.item.impl</a> &gt; <span class="el_source">TshirtItem.java</span></div><h1>TshirtItem.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage.item.impl;
+
+import com.marketplace.vintage.item.Item;
+import com.marketplace.vintage.item.ItemProperty;
+import com.marketplace.vintage.item.ItemType;
+import com.marketplace.vintage.item.condition.ItemCondition;
+import com.marketplace.vintage.item.condition.ItemConditionType;
+
+import java.math.BigDecimal;
+import java.util.Objects;
+import java.util.UUID;
+
+public class TshirtItem extends Item {
+
+<span class="fc" id="L15">    public enum TshirtItemSize {</span>
+<span class="fc" id="L16">        SMALL, MEDIUM, LARGE, EXTRA_LARGE</span>
+    }
+
+<span class="fc" id="L19">    public enum TshirtItemPattern {</span>
+<span class="fc" id="L20">        PLAIN, STRIPES, PALM_TREES</span>
+    }
+
+    private final TshirtItemSize size;
+    private final TshirtItemPattern pattern;
+
+    public TshirtItem(TshirtItem item) {
+<span class="fc" id="L27">        this(item.getOwnerUuid(),</span>
+<span class="fc" id="L28">                item.getAlphanumericId(),</span>
+<span class="fc" id="L29">                item.getCurrentStock(),</span>
+<span class="fc" id="L30">                item.getItemCondition(),</span>
+<span class="fc" id="L31">                item.getDescription(),</span>
+<span class="fc" id="L32">                item.getBrand(),</span>
+<span class="fc" id="L33">                item.getBasePrice(),</span>
+<span class="fc" id="L34">                item.getParcelCarrierName(),</span>
+<span class="fc" id="L35">                item.getSize(),</span>
+<span class="fc" id="L36">                item.getPattern());</span>
+<span class="fc" id="L37">    }</span>
+
+    public TshirtItem(UUID ownerUuid,
+                      String alphanumericId,
+                      int currentStock,
+                      ItemCondition itemCondition,
+                      String description,
+                      String brand,
+                      BigDecimal basePrice,
+                      String parcelCarrierName,
+                      TshirtItemSize size,
+                      TshirtItemPattern pattern) {
+<span class="fc" id="L49">        super(ownerUuid, alphanumericId, currentStock, itemCondition, description, brand, basePrice, parcelCarrierName);</span>
+<span class="fc" id="L50">        this.size = size;</span>
+<span class="fc" id="L51">        this.pattern = pattern;</span>
+<span class="fc" id="L52">    }</span>
+
+    public TshirtItemSize getSize() {
+<span class="fc" id="L55">        return size;</span>
+    }
+
+    public TshirtItemPattern getPattern() {
+<span class="fc" id="L59">        return pattern;</span>
+    }
+
+    @Override
+    public &lt;T&gt; T getProperty(ItemProperty property, Class&lt;T&gt; expectedClass) {
+<span class="fc bfc" id="L64" title="All 3 branches covered.">        return switch (property) {</span>
+<span class="fc" id="L65">            case TSHIRT_SIZE -&gt; expectedClass.cast(getSize());</span>
+<span class="fc" id="L66">            case TSHIRT_PATTERN -&gt; expectedClass.cast(getPattern());</span>
+<span class="fc" id="L67">            default -&gt; super.getProperty(property, expectedClass);</span>
+        };
+    }
+
+    @Override
+    public ItemType getItemType() {
+<span class="fc" id="L73">        return ItemType.TSHIRT;</span>
+    }
+
+    @Override
+    public BigDecimal getPriceCorrection(int currentYear) {
+<span class="pc bpc" id="L78" title="2 of 4 branches missed.">        if (getItemCondition().getType() == ItemConditionType.USED &amp;&amp; getPattern() != TshirtItemPattern.PLAIN) {</span>
+<span class="fc" id="L79">            return getBasePrice().negate().multiply(BigDecimal.valueOf(0.5));</span>
+        }
+
+<span class="nc" id="L82">        return BigDecimal.ZERO;</span>
+    }
+
+    @Override
+    public Item clone() {
+<span class="fc" id="L87">        return new TshirtItem(this);</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        if (this == o) return true;</span>
+<span class="pc bpc" id="L93" title="2 of 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (!super.equals(o)) return false;</span>
+<span class="fc" id="L95">        TshirtItem that = (TshirtItem) o;</span>
+<span class="pc bpc" id="L96" title="2 of 4 branches missed.">        return getSize() == that.getSize() &amp;&amp; getPattern() == that.getPattern();</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L101">        return Objects.hash(super.hashCode(), getSize(), getPattern());</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L106">        return &quot;TshirtItem{&quot; +</span>
+<span class="nc" id="L107">                &quot;size=&quot; + getSize() +</span>
+<span class="nc" id="L108">                &quot;, pattern=&quot; + getPattern() +</span>
+<span class="nc" id="L109">                &quot;, alphanumericID='&quot; + getAlphanumericId() + '\'' +</span>
+<span class="nc" id="L110">                &quot;, itemCondition=&quot; + getItemCondition() +</span>
+<span class="nc" id="L111">                &quot;, description='&quot; + getDescription() + '\'' +</span>
+<span class="nc" id="L112">                &quot;, brand='&quot; + getBrand() + '\'' +</span>
+<span class="nc" id="L113">                &quot;, basePrice=&quot; + getBasePrice() +</span>
+<span class="nc" id="L114">                &quot;, parcelCarrierName=&quot; + getParcelCarrierName() +</span>
+                '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
