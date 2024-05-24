@@ -58,7 +58,7 @@ public class Order implements Serializable {
     }
 
     public List&lt;InvoiceLine&gt; getInvoiceLines() {
-<span class="nc" id="L61">        return invoiceLines;</span>
+<span class="fc" id="L61">        return invoiceLines;</span>
     }
 
     public BigDecimal getTotalPrice() {
@@ -98,35 +98,35 @@ public class Order implements Serializable {
     }
 
     public BigDecimal getParcelCarrierShippingCost(String parcelCarrierName) {
-<span class="nc" id="L101">        BigDecimal total = BigDecimal.ZERO;</span>
-<span class="nc bnc" id="L102" title="All 2 branches missed.">        for (InvoiceLine invoiceLine : this.getInvoiceLines()) {</span>
-<span class="nc bnc" id="L103" title="All 2 branches missed.">            if (invoiceLine instanceof ParcelShipmentCostInvoiceLine shipmentCostInvoiceLine) {</span>
-<span class="nc bnc" id="L104" title="All 2 branches missed.">                if (shipmentCostInvoiceLine.getParcelCarrierName().equals(parcelCarrierName)) {</span>
-<span class="nc" id="L105">                    total = total.add(shipmentCostInvoiceLine.getPrice());</span>
+<span class="fc" id="L101">        BigDecimal total = BigDecimal.ZERO;</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        for (InvoiceLine invoiceLine : this.getInvoiceLines()) {</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">            if (invoiceLine instanceof ParcelShipmentCostInvoiceLine shipmentCostInvoiceLine) {</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">                if (shipmentCostInvoiceLine.getParcelCarrierName().equals(parcelCarrierName)) {</span>
+<span class="fc" id="L105">                    total = total.add(shipmentCostInvoiceLine.getPrice());</span>
                 }
             }
-<span class="nc" id="L108">        }</span>
-<span class="nc" id="L109">        return total;</span>
+<span class="fc" id="L108">        }</span>
+<span class="fc" id="L109">        return total;</span>
     }
 
     public BigDecimal getSumOfSatisfactionPrices() {
-<span class="nc" id="L113">        BigDecimal total = BigDecimal.ZERO;</span>
-<span class="nc bnc" id="L114" title="All 2 branches missed.">        for (InvoiceLine invoiceLine : this.getInvoiceLines()) {</span>
-<span class="nc bnc" id="L115" title="All 2 branches missed.">            if (invoiceLine instanceof ItemSatisfactionInvoiceLine) {</span>
-<span class="nc" id="L116">                total = total.add(invoiceLine.getPrice());</span>
+<span class="fc" id="L113">        BigDecimal total = BigDecimal.ZERO;</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        for (InvoiceLine invoiceLine : this.getInvoiceLines()) {</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">            if (invoiceLine instanceof ItemSatisfactionInvoiceLine) {</span>
+<span class="fc" id="L116">                total = total.add(invoiceLine.getPrice());</span>
             }
-<span class="nc" id="L118">        }</span>
-<span class="nc" id="L119">        return total;</span>
+<span class="fc" id="L118">        }</span>
+<span class="fc" id="L119">        return total;</span>
     }
 
     public BigDecimal getSumOfItemPricesFromSeller(UUID sellerId) {
-<span class="nc" id="L123">        BigDecimal total = BigDecimal.ZERO;</span>
-<span class="nc bnc" id="L124" title="All 2 branches missed.">        for (OrderedItem orderedItem : this.getOrderedItems()) {</span>
-<span class="nc bnc" id="L125" title="All 2 branches missed.">            if (orderedItem.getSellerId().equals(sellerId)) {</span>
-<span class="nc" id="L126">                total = total.add(orderedItem.getTotalPrice());</span>
+<span class="fc" id="L123">        BigDecimal total = BigDecimal.ZERO;</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">        for (OrderedItem orderedItem : this.getOrderedItems()) {</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">            if (orderedItem.getSellerId().equals(sellerId)) {</span>
+<span class="fc" id="L126">                total = total.add(orderedItem.getTotalPrice());</span>
             }
-<span class="nc" id="L128">        }</span>
-<span class="nc" id="L129">        return total;</span>
+<span class="fc" id="L128">        }</span>
+<span class="fc" id="L129">        return total;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -2,6 +2,7 @@ com/marketplace/vintage/order/OrderFactoryTest.class
 com/marketplace/vintage/command/CommandManagerTest$2.class
 com/marketplace/vintage/questionnaire/QuestionnaireTest.class
 com/marketplace/vintage/user/UserTest.class
+com/marketplace/vintage/order/OrderTest.class
 com/marketplace/vintage/persistent/PersistentManagerTest.class
 com/marketplace/vintage/user/UserManagerTest.class
 com/marketplace/vintage/command/CommandManagerTest$1.class
