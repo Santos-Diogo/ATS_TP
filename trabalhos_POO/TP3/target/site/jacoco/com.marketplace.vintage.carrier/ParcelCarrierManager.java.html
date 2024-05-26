@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParcelCarrierManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TP3</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage.carrier</a> &gt; <span class="el_source">ParcelCarrierManager.java</span></div><h1>ParcelCarrierManager.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage.carrier;
+
+import com.marketplace.vintage.exceptions.EntityAlreadyExistsException;
+import com.marketplace.vintage.exceptions.EntityNotFoundException;
+import com.marketplace.vintage.item.ItemType;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class ParcelCarrierManager implements Serializable {
+
+    private final Map&lt;String, ParcelCarrier&gt; carriersByName;
+
+<span class="fc" id="L19">    public ParcelCarrierManager() {</span>
+<span class="fc" id="L20">        this.carriersByName = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L21">    }</span>
+
+    public void registerParcelCarrier(@NotNull ParcelCarrier carrier) {
+<span class="fc" id="L24">        String carrierName = carrier.getName();</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (this.carriersByName.containsKey(carrierName)) {</span>
+<span class="fc" id="L26">            throw new EntityAlreadyExistsException(&quot;A carrier with that name already exists&quot;);</span>
+        }
+
+<span class="fc" id="L29">        this.carriersByName.put(carrierName, carrier);</span>
+<span class="fc" id="L30">    }</span>
+
+    public ParcelCarrier getCarrierByName(String name) {
+<span class="fc" id="L33">        ParcelCarrier carrier = this.carriersByName.get(name);</span>
+
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (carrier == null) {</span>
+<span class="fc" id="L36">            throw new EntityNotFoundException(&quot;A carrier with the name &quot; + name + &quot; was not found&quot;);</span>
+        }
+
+<span class="fc" id="L39">        return carrier.clone();</span>
+    }
+
+    public boolean containsCarrierByName(String name) {
+<span class="nc" id="L43">        return this.carriersByName.containsKey(name);</span>
+    }
+
+    public void updateParcelCarrier(String carrierName, ParcelCarrier parcelCarrier) {
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (!this.carriersByName.containsKey(carrierName)) {</span>
+<span class="nc" id="L48">            throw new EntityNotFoundException(&quot;A carrier with the name &quot; + carrierName + &quot; was not found&quot;);</span>
+        }
+
+<span class="nc" id="L51">        this.carriersByName.put(carrierName, parcelCarrier);</span>
+<span class="nc" id="L52">    }</span>
+
+    public List&lt;ParcelCarrier&gt; getAll() {
+<span class="nc" id="L55">        return carriersByName.values().stream().map(ParcelCarrier::clone).collect(Collectors.toList());</span>
+    }
+
+    public List&lt;ParcelCarrier&gt; getAllCompatibleWith(ItemType itemType) {
+<span class="nc" id="L59">        return getAll().stream().filter(carrier -&gt; carrier.canDeliverItemType(itemType)).collect(Collectors.toList());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

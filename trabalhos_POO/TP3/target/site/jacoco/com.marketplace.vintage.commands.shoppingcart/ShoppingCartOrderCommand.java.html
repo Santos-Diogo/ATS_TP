@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ShoppingCartOrderCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TP3</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage.commands.shoppingcart</a> &gt; <span class="el_source">ShoppingCartOrderCommand.java</span></div><h1>ShoppingCartOrderCommand.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage.commands.shoppingcart;
+
+import com.marketplace.vintage.Vintage;
+import com.marketplace.vintage.command.BaseCommand;
+import com.marketplace.vintage.input.InputMapper;
+import com.marketplace.vintage.input.InputPrompter;
+import com.marketplace.vintage.logging.Logger;
+import com.marketplace.vintage.order.Order;
+import com.marketplace.vintage.order.invoice.InvoiceLine;
+import com.marketplace.vintage.user.User;
+import com.marketplace.vintage.utils.StringUtils;
+import com.marketplace.vintage.view.impl.UserView;
+
+import java.util.List;
+
+public class ShoppingCartOrderCommand extends BaseCommand {
+
+    private final UserView userView;
+    private final Vintage vintage;
+
+    public ShoppingCartOrderCommand(UserView userView, Vintage vintage) {
+<span class="nc" id="L22">        super(&quot;order&quot;, &quot;cart order (customId)&quot;, 0, &quot;Makes an order out of the current shopping cart&quot;);</span>
+<span class="nc" id="L23">        this.userView = userView;</span>
+<span class="nc" id="L24">        this.vintage = vintage;</span>
+<span class="nc" id="L25">    }</span>
+
+    @Override
+    protected void executeSafely(Logger logger, InputPrompter inputPrompter, String[] args) {
+<span class="nc" id="L29">        User currentLoggedInUser = userView.getCurrentLoggedInUser();</span>
+<span class="nc" id="L30">        List&lt;String&gt; currentOrder = currentLoggedInUser.getShoppingCart();</span>
+
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (currentOrder.isEmpty()) {</span>
+<span class="nc" id="L33">            logger.warn(&quot;You haven't added any items to the shopping cart.&quot;);</span>
+<span class="nc" id="L34">            return;</span>
+        }
+
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        for (String s : currentOrder) {</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            if (!vintage.itemHasStock(s)) {</span>
+<span class="nc" id="L39">                logger.warn(&quot;The item (&quot; + s + &quot;) has no stock. Please remove it from your shopping cart.&quot;);</span>
+<span class="nc" id="L40">                return;</span>
+            }
+<span class="nc" id="L42">        }</span>
+
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        String customId = args.length &gt; 0 ? args[0] : null;</span>
+<span class="nc" id="L45">        Order order = vintage.assembleOrder(customId, currentLoggedInUser);</span>
+
+<span class="nc" id="L47">        logger.info(&quot;Order summary:&quot;);</span>
+
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        for (InvoiceLine invoiceLine : order.getInvoiceLines()) {</span>
+<span class="nc" id="L50">            logger.info(&quot; - &quot; + StringUtils.formatCurrency(invoiceLine.getPrice()) + &quot;: &quot; + invoiceLine.getDisplayName());</span>
+<span class="nc" id="L51">        }</span>
+<span class="nc" id="L52">        logger.info(&quot;Total: &quot; + StringUtils.formatCurrency(order.getTotalPrice()));</span>
+
+<span class="nc" id="L54">        logger.info();</span>
+
+<span class="nc" id="L56">        boolean proceed = inputPrompter.askForInput(logger, &quot;Confirm the purchase (y/n)&quot;, InputMapper.BOOLEAN);</span>
+
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (!proceed) {</span>
+<span class="nc" id="L59">            logger.info(&quot;Order creation cancelled.&quot;);</span>
+<span class="nc" id="L60">            return;</span>
+        }
+
+<span class="nc" id="L63">        logger.info(&quot;Order (&quot; + order.getOrderId() + &quot;) created successfully. Your order will be delivered soon.&quot;);</span>
+<span class="nc" id="L64">        this.vintage.registerOrder(order, currentLoggedInUser);</span>
+<span class="nc" id="L65">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

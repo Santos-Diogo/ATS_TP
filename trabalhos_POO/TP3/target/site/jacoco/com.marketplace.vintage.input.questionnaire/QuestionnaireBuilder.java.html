@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QuestionnaireBuilder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TP3</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage.input.questionnaire</a> &gt; <span class="el_source">QuestionnaireBuilder.java</span></div><h1>QuestionnaireBuilder.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage.input.questionnaire;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Function;
+
+public class QuestionnaireBuilder {
+
+    private final List&lt;QuestionnaireQuestion&gt; questions;
+
+<span class="fc" id="L11">    private QuestionnaireBuilder() {</span>
+<span class="fc" id="L12">        this.questions = new LinkedList&lt;&gt;(); // ensure order of questions is preserved</span>
+<span class="fc" id="L13">    }</span>
+
+    public static QuestionnaireBuilder newBuilder() {
+<span class="fc" id="L16">        return new QuestionnaireBuilder();</span>
+    }
+
+    private boolean questionExists(String id) {
+<span class="fc" id="L20">        return this.questions.stream().anyMatch(question -&gt; question.getId().equals(id));</span>
+    }
+
+    public QuestionnaireBuilder withQuestion(String id, String question, Function&lt;String, ?&gt; conversationParameter) {
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (questionExists(id)) {</span>
+<span class="nc" id="L25">            throw new IllegalArgumentException(&quot;Question with id &quot; + id + &quot; already exists&quot;);</span>
+        }
+
+<span class="fc" id="L28">        this.questions.add(new QuestionnaireQuestion(id, question, conversationParameter));</span>
+<span class="fc" id="L29">        return this;</span>
+    }
+
+    public Questionnaire build() {
+<span class="fc" id="L33">        return new Questionnaire(this.questions);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

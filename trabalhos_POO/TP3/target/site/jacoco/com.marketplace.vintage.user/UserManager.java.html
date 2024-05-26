@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TP3</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage.user</a> &gt; <span class="el_source">UserManager.java</span></div><h1>UserManager.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage.user;
+
+import com.marketplace.vintage.exceptions.EntityAlreadyExistsException;
+import com.marketplace.vintage.exceptions.EntityNotFoundException;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.Serializable;
+import java.util.*;
+
+public class UserManager implements Serializable {
+
+    private final Map&lt;UUID, User&gt; usersById;
+    private final Map&lt;String, User&gt; usersByUsername;
+    private final Map&lt;String, User&gt; usersByEmail;
+
+<span class="fc" id="L16">    public UserManager() {</span>
+<span class="fc" id="L17">        this.usersById = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L18">        this.usersByUsername = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L19">        this.usersByEmail = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L20">    }</span>
+
+    public User createUser(String username, String email, String name, String address, String taxNumber) {
+<span class="nc" id="L23">        User user = new User(username, email, name, address, taxNumber);</span>
+<span class="nc" id="L24">        this.registerUser(user);</span>
+<span class="nc" id="L25">        return user;</span>
+    }
+
+    public void registerUser(@NotNull User user) {
+<span class="fc" id="L29">        String userUsername = user.getUsername();</span>
+<span class="fc" id="L30">        String userEmail = user.getEmail().toLowerCase();</span>
+
+<span class="fc" id="L32">        validateUsername(userUsername);</span>
+
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (this.usersById.containsKey(user.getId())) {</span>
+<span class="nc" id="L35">            throw new EntityAlreadyExistsException(&quot;A user with that id already exists&quot;);</span>
+        }
+
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (this.usersByEmail.containsKey(userEmail)) {</span>
+<span class="fc" id="L39">            throw new EntityAlreadyExistsException(&quot;A user with that email already exists&quot;);</span>
+        }
+
+<span class="fc" id="L42">        this.usersById.put(user.getId(), user);</span>
+<span class="fc" id="L43">        this.usersByUsername.put(userUsername, user);</span>
+<span class="fc" id="L44">        this.usersByEmail.put(userEmail, user);</span>
+<span class="fc" id="L45">    }</span>
+
+    public boolean existsUserWithEmail(String email) {
+<span class="fc" id="L48">        return this.usersByEmail.containsKey(email.toLowerCase());</span>
+    }
+
+    public boolean existsUserWithUsername(String username) {
+<span class="nc" id="L52">        return this.usersByUsername.containsKey(username);</span>
+    }
+
+    public void validateUsername(String username) {
+<span class="pc bpc" id="L56" title="2 of 4 branches missed.">        if (username == null || username.isEmpty()) {</span>
+<span class="nc" id="L57">            throw new IllegalArgumentException(&quot;The user's username cannot be null or empty&quot;);</span>
+        }
+
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (username.contains(&quot; &quot;)) {</span>
+<span class="nc" id="L61">            throw new IllegalArgumentException(&quot;The user's username cannot contain spaces&quot;);</span>
+        }
+
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (this.usersByUsername.containsKey(username)) {</span>
+<span class="fc" id="L65">            throw new EntityAlreadyExistsException(&quot;A user with that username already exists&quot;);</span>
+        }
+<span class="fc" id="L67">    }</span>
+
+    public User getUserById(UUID userId) {
+<span class="nc" id="L70">        User user = this.usersById.get(userId);</span>
+
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        if (user == null) {</span>
+<span class="nc" id="L73">            throw new EntityNotFoundException(&quot;A user with the id &quot; + userId + &quot; was not found&quot;);</span>
+        }
+
+<span class="nc" id="L76">        return user.clone();</span>
+    }
+
+    public User getUserByUsername(String userUsername) {
+<span class="fc" id="L80">        User user = this.usersByUsername.get(userUsername);</span>
+
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (user == null) {</span>
+<span class="fc" id="L83">            throw new EntityNotFoundException(&quot;A user with the username &quot; + userUsername + &quot; was not found&quot;);</span>
+        }
+
+<span class="fc" id="L86">        return user.clone();</span>
+    }
+
+    public User getUserByEmail(String email) {
+<span class="fc" id="L90">        User user = this.usersByEmail.get(email.toLowerCase());</span>
+
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (user == null) {</span>
+<span class="fc" id="L93">            throw new EntityNotFoundException(&quot;A user with the email &quot; + email + &quot; was not found&quot;);</span>
+        }
+
+<span class="fc" id="L96">        return user.clone();</span>
+    }
+
+    public void updateUser(User user) {
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        if (!this.usersById.containsKey(user.getId())) {</span>
+<span class="nc" id="L101">            throw new EntityNotFoundException(&quot;A user with the id &quot; + user.getId() + &quot; was not found&quot;);</span>
+        }
+
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        if (!this.usersByUsername.containsKey(user.getUsername())) {</span>
+<span class="nc" id="L105">            throw new EntityNotFoundException(&quot;A user with the username &quot; + user.getUsername() + &quot; was not found&quot;);</span>
+        }
+
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (!this.usersByEmail.containsKey(user.getEmail())) {</span>
+<span class="nc" id="L109">            throw new EntityNotFoundException(&quot;A user with the email &quot; + user.getEmail() + &quot; was not found&quot;);</span>
+        }
+
+<span class="nc" id="L112">        this.usersById.put(user.getId(), user);</span>
+<span class="nc" id="L113">        this.usersByUsername.put(user.getUsername(), user);</span>
+<span class="nc" id="L114">        this.usersByEmail.put(user.getEmail(), user);</span>
+<span class="nc" id="L115">    }</span>
+
+    public List&lt;User&gt; getAll() {
+<span class="nc" id="L118">        return new ArrayList&lt;&gt;(this.usersById.values());</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

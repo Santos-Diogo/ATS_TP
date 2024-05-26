@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VintageApplication.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TP3</a> &gt; <a href="index.source.html" class="el_package">com.marketplace.vintage</a> &gt; <span class="el_source">VintageApplication.java</span></div><h1>VintageApplication.java</h1><pre class="source lang-java linenums">package com.marketplace.vintage;
+
+import com.marketplace.vintage.carrier.ParcelCarrierController;
+import com.marketplace.vintage.carrier.ParcelCarrierManager;
+import com.marketplace.vintage.expression.Exp4jExpressionSolver;
+import com.marketplace.vintage.expression.ExpressionSolver;
+import com.marketplace.vintage.input.impl.StdinInputPrompter;
+import com.marketplace.vintage.item.ItemController;
+import com.marketplace.vintage.item.ItemFactory;
+import com.marketplace.vintage.item.ItemManager;
+import com.marketplace.vintage.logging.JavaLogger;
+import com.marketplace.vintage.logging.Logger;
+import com.marketplace.vintage.order.OrderController;
+import com.marketplace.vintage.order.OrderFactory;
+import com.marketplace.vintage.order.OrderManager;
+import com.marketplace.vintage.persistent.PersistentManager;
+import com.marketplace.vintage.scripting.ScriptController;
+import com.marketplace.vintage.scripting.exception.ScriptException;
+import com.marketplace.vintage.time.TimeManager;
+import com.marketplace.vintage.user.UserController;
+import com.marketplace.vintage.user.UserManager;
+import com.marketplace.vintage.view.View;
+import com.marketplace.vintage.view.ViewFactory;
+import com.marketplace.vintage.view.ViewType;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class VintageApplication {
+
+    private final Logger logger;
+    private final StdinInputPrompter inputPrompter;
+    private ViewFactory viewFactory;
+    private PersistentManager persistentManager;
+    private UserManager userManager;
+    private ParcelCarrierManager parcelCarrierManager;
+    private ItemManager itemManager;
+    private OrderManager orderManager;
+    private TimeManager timeManager;
+
+<span class="nc" id="L43">    public VintageApplication() {</span>
+<span class="nc" id="L44">        this.logger = new JavaLogger();</span>
+<span class="nc" id="L45">        this.inputPrompter = new StdinInputPrompter();</span>
+<span class="nc" id="L46">    }</span>
+
+    public void init() {
+<span class="nc" id="L49">        ExpressionSolver expressionSolver = new Exp4jExpressionSolver();</span>
+<span class="nc" id="L50">        ItemFactory itemFactory = new ItemFactory();</span>
+
+<span class="nc" id="L52">        this.persistentManager = new PersistentManager(getPersistentFile());</span>
+<span class="nc" id="L53">        loadSavedProgramState(this.persistentManager);</span>
+
+<span class="nc" id="L55">        ParcelCarrierController parcelCarrierController = new ParcelCarrierController(parcelCarrierManager);</span>
+
+<span class="nc" id="L57">        OrderFactory orderFactory = new OrderFactory();</span>
+<span class="nc" id="L58">        OrderController orderController = new OrderController(orderManager, orderFactory);</span>
+
+<span class="nc" id="L60">        ScriptController scriptController = new ScriptController();</span>
+<span class="nc" id="L61">        UserController userController = new UserController(userManager);</span>
+
+<span class="nc" id="L63">        ItemController itemController = new ItemController(itemManager, itemFactory);</span>
+
+<span class="nc" id="L65">        Vintage vintage = new Vintage(itemController, orderController, timeManager, parcelCarrierController, expressionSolver, userController, scriptController);</span>
+
+<span class="nc" id="L67">        this.viewFactory = new ViewFactory(logger, inputPrompter, vintage);</span>
+
+        try {
+<span class="nc" id="L70">            scriptController.initialize(logger, viewFactory, vintage);</span>
+<span class="nc" id="L71">            this.logger.info(&quot;Loaded &quot; + scriptController.loadScripts() + &quot; scripts.&quot;);</span>
+<span class="nc" id="L72">        } catch (ScriptException exception) {</span>
+<span class="nc" id="L73">            this.logger.warn(&quot;Failed to load scripts: &quot; + exception.getMessage());</span>
+<span class="nc" id="L74">        }</span>
+<span class="nc" id="L75">    }</span>
+
+
+    public void start() {
+<span class="nc" id="L79">        logger.info(&quot;Welcome to the Vintage Marketplace!&quot;);</span>
+<span class="nc" id="L80">        logger.info();</span>
+
+<span class="nc" id="L82">        String availableViews = buildAllViewsString() + &quot; or Exit (exit)&quot;;</span>
+
+        while (true) {
+<span class="nc" id="L85">            logger.info(&quot;Choose which view you want to use.&quot;);</span>
+<span class="nc" id="L86">            logger.info(&quot;Available views: &quot; + availableViews);</span>
+
+<span class="nc" id="L88">            View view = null;</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            while (view == null) {</span>
+<span class="nc" id="L90">                String viewTypeName = inputPrompter.askForInput(logger, &quot;&gt;&quot;).trim();</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">                if (viewTypeName.equalsIgnoreCase(&quot;exit&quot;)) {</span>
+<span class="nc" id="L92">                    shutdown();</span>
+<span class="nc" id="L93">                    return;</span>
+                }
+<span class="nc" id="L95">                ViewType viewType = ViewType.fromCommandName(viewTypeName);</span>
+
+<span class="nc bnc" id="L97" title="All 2 branches missed.">                if (viewType == null) {</span>
+<span class="nc" id="L98">                    logger.info(&quot;Invalid view name.&quot;);</span>
+<span class="nc" id="L99">                    logger.info(&quot;Please type one of the following: &quot; + availableViews);</span>
+<span class="nc" id="L100">                    continue;</span>
+                }
+<span class="nc" id="L102">                view = viewFactory.createView(viewType);</span>
+<span class="nc" id="L103">            }</span>
+
+<span class="nc" id="L105">            view.run();</span>
+<span class="nc" id="L106">        }</span>
+    }
+
+    public void shutdown() {
+<span class="nc" id="L110">        saveProgramState(persistentManager);</span>
+<span class="nc" id="L111">        this.inputPrompter.close();</span>
+<span class="nc" id="L112">    }</span>
+
+    public String buildAllViewsString() {
+<span class="nc" id="L115">        return ViewType.getAllViewTypes().stream()</span>
+<span class="nc" id="L116">                .map(viewType -&gt; viewType.getDisplayName() + &quot; (&quot; + viewType.getCommandName() + &quot;)&quot;)</span>
+<span class="nc" id="L117">                .collect(Collectors.joining(&quot;, &quot;));</span>
+    }
+
+    public void saveProgramState(PersistentManager persistentManager) {
+<span class="nc" id="L121">        this.logger.info();</span>
+<span class="nc" id="L122">        this.logger.info(&quot;Saving program state...&quot;);</span>
+
+<span class="nc" id="L124">        persistentManager.addReferenceToSave(&quot;userManager&quot;, this.userManager);</span>
+<span class="nc" id="L125">        persistentManager.addReferenceToSave(&quot;parcelCarrierManager&quot;, this.parcelCarrierManager);</span>
+<span class="nc" id="L126">        persistentManager.addReferenceToSave(&quot;itemManager&quot;, this.itemManager);</span>
+<span class="nc" id="L127">        persistentManager.addReferenceToSave(&quot;orderManager&quot;, this.orderManager);</span>
+<span class="nc" id="L128">        persistentManager.addReferenceToSave(&quot;timeManager&quot;, this.timeManager);</span>
+<span class="nc" id="L129">        persistentManager.save();</span>
+<span class="nc" id="L130">    }</span>
+
+    public void loadSavedProgramState(PersistentManager persistentManager) {
+<span class="nc" id="L133">        this.logger.info(&quot;Loading saved program state...&quot;);</span>
+<span class="nc" id="L134">        Map&lt;String, Object&gt; loadedData = loadSafely(persistentManager);</span>
+
+<span class="nc" id="L136">        this.userManager = (UserManager) loadedData.getOrDefault(&quot;userManager&quot;, new UserManager());</span>
+<span class="nc" id="L137">        this.parcelCarrierManager = (ParcelCarrierManager) loadedData.getOrDefault(&quot;parcelCarrierManager&quot;, new ParcelCarrierManager());</span>
+<span class="nc" id="L138">        this.itemManager = (ItemManager) loadedData.getOrDefault(&quot;itemManager&quot;, new ItemManager());</span>
+<span class="nc" id="L139">        this.orderManager = (OrderManager) loadedData.getOrDefault(&quot;orderManager&quot;, new OrderManager());</span>
+<span class="nc" id="L140">        this.timeManager = (TimeManager) loadedData.getOrDefault(&quot;timeManager&quot;, new TimeManager(VintageConstants.VINTAGE_START_DATE));</span>
+<span class="nc" id="L141">    }</span>
+
+    private Map&lt;String, Object&gt; loadSafely(PersistentManager persistentManager) {
+        try {
+<span class="nc" id="L145">            return persistentManager.loadPersistentData();</span>
+<span class="nc" id="L146">        } catch (Exception e) {</span>
+<span class="nc" id="L147">            this.logger.warn(&quot;Could not load &quot; + getPersistentFile().getName() + &quot;. Corrupted data?&quot;);</span>
+<span class="nc" id="L148">            return new HashMap&lt;&gt;();</span>
+        }
+    }
+
+    public File getPersistentFile() {
+<span class="nc" id="L153">        return new File(VintageConstants.PERSISTENT_PROGRAM_STATE_SAVE_PATH);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
