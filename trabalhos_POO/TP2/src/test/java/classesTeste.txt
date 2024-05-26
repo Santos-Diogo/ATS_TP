@@ -3,15 +3,15 @@ ComparatorVendas - Feito
 Controlador - Não faço ideia como fazer isto!
 Encomenda - Feito
 Fatura - Feito
-Gestor_Artigos - Com erros (tuda fodida esta merda)
+Gestor_Artigos - Quase tudo, tudo o que tenha a ver com datas ele dá erros, dá sempre expect 0 e não sei porquê?
 Gestor_Transportadora - Por fazer?
 Gestor_Utilizadores - Por fazer?
 GestorEncomendas - Por fazer?
-Mala - Por fazer
-Menu - Por fazer
-Parsing - Por fazer?
+Mala - Feito, testa todas as linhas mas aparece a 97%?
+Menu - Isto é tipo o controlador! Estou uma beca perdido!
+Parsing - O scanner dá null tho! mas está quase feito!
 Sapatilha - Por fazer?
-Transportadora - Por fazer 
-Tshirt -Por fazer
+Transportadora - Feito
+Tshirt -Feito
 Utilizador - Por fazer
 Vintage - Por fazer

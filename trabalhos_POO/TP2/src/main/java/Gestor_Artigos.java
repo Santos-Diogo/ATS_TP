@@ -39,8 +39,8 @@ public class  Gestor_Artigos implements Serializable   {
     public Gestor_Artigos(Map <Integer ,Artigo>  artigos){
         this.artigos = new HashMap<>();
     }
-    public Gestor_Artigos(Gestor_Artigos g){
-        this.getArtigos();
+    public Gestor_Artigos(Gestor_Artigos g) {
+        this.artigos = g.getArtigos();
     }
     public Map<String, Artigo> getArtigos() {
         Map<String, Artigo> copia = new HashMap<>();
