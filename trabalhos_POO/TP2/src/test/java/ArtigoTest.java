@@ -160,7 +160,7 @@ public class ArtigoTest {
 
         // Verificação da igualdade
         Assertions.assertTrue(artigo1.equals(artigo2));
-}
+    }
 
     @Test
     void testToString() {

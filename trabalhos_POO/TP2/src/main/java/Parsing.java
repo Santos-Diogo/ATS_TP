@@ -33,6 +33,11 @@ public class Parsing {
         this.vintage = vintage;
     }
 
+        // Adicionando o método createScanner
+        public Scanner createScanner(File file) throws FileNotFoundException {
+            return new Scanner(file);
+        }
+
     public LocalDate leitura_ficheiro(String fileName, LocalDate data)  {
         
         File file = null;
