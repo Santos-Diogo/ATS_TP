@@ -1,9 +1,9 @@
 package com.marketplace.vintage.carrier;
 
-import com.marketplace.vintage.exceptions.EntityAlreadyExistsException;
 import com.marketplace.vintage.exceptions.EntityNotFoundException;
-
 import org.junit.jupiter.api.Test;
+import com.marketplace.vintage.exceptions.EntityAlreadyExistsException;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
@@ -24,6 +24,8 @@ class ParcelCarrierManagerTest {
         ParcelCarrier parcel_carrier_delux= parcelCarrierManager.getCarrierByName(testPremium);
         assertEquals("DHL", parcelCarrier.getName());
         assertEquals("DHL-Deluxe", parcel_carrier_delux.getName());
+        assertEquals(parcelCarrier.getType(), ParcelCarrierType.NORMAL);
+        assertEquals(parcel_carrier_delux.getType(), ParcelCarrierType.PREMIUM);
 
         assertThrowsExactly(EntityNotFoundException.class, () -> parcelCarrierManager.getCarrierByName("UPS"));
         assertThrowsExactly(EntityAlreadyExistsException.class, () -> parcelCarrierManager.registerParcelCarrier(ParcelCarrierFactory.createNormalParcelCarrier(testNormal)));

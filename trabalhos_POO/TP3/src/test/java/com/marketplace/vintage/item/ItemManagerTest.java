@@ -1,21 +1,20 @@
 package com.marketplace.vintage.item;
 
-import com.marketplace.vintage.exceptions.EntityAlreadyExistsException;
 import com.marketplace.vintage.exceptions.EntityNotFoundException;
-
 import com.marketplace.vintage.item.impl.MalaItem;
-import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
 import java.util.UUID;
+import org.junit.jupiter.api.Test;
+import com.marketplace.vintage.exceptions.EntityAlreadyExistsException;
+
+
 
 import static com.marketplace.vintage.item.condition.ItemConditions.NEW;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 public class ItemManagerTest {
-
-    @Test
+        @Test
     void testItemManager() {
         ItemManager itemManager = new ItemManager();
         String id = itemManager.generateUniqueCode();
