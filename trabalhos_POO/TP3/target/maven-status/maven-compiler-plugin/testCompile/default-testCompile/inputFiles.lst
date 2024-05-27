@@ -2,6 +2,7 @@
 /home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/src/test/java/com/marketplace/vintage/item/ItemTest.java
 /home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/src/test/java/com/marketplace/vintage/order/OrderFactoryTest.java
 /home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/src/test/java/com/marketplace/vintage/carrier/NormalParcelCarrierTest.java
+/home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/src/test/java/com/marketplace/vintage/item/ItemControllerTest.java
 /home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/src/test/java/com/marketplace/vintage/item/ItemManagerTest.java
 /home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/src/test/java/com/marketplace/vintage/order/OrderTest.java
 /home/samba/Code/Uni/3ano/2sem/ats_tp/trabalhos_POO/TP3/src/test/java/com/marketplace/vintage/item/impl/SapatilhasItemTest.java

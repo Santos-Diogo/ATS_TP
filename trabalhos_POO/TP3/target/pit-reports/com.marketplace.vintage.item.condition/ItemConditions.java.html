@@ -385,42 +385,42 @@
 <a name='org.pitest.mutationtest.report.html.SourceFile@568e814c_25'/>
 25
 </td>
-<td class='survived'>
+<td class='killed'>
 <span class='pop'>
 <a href='#grouporg.pitest.mutationtest.report.html.SourceFile@568e814c_25'>10</a>
 <span>
-1. createUsed : changed conditional boundary &rarr; SURVIVED<br/>
-2. createUsed : Substituted 10 with 11 &rarr; SURVIVED<br/>
-3. createUsed : Substituted 1 with 0 &rarr; SURVIVED<br/>
-4. createUsed : changed conditional boundary &rarr; SURVIVED<br/>
-5. createUsed : removed conditional - replaced comparison check with true &rarr; SURVIVED<br/>
-6. createUsed : removed conditional - replaced comparison check with false &rarr; SURVIVED<br/>
-7. createUsed : negated conditional &rarr; KILLED<br/>
-8. createUsed : removed conditional - replaced comparison check with true &rarr; KILLED<br/>
-9. createUsed : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
-10. createUsed : negated conditional &rarr; KILLED<br/>
+1. createUsed : negated conditional &rarr; KILLED<br/>
+2. createUsed : changed conditional boundary &rarr; KILLED<br/>
+3. createUsed : Substituted 10 with 11 &rarr; KILLED<br/>
+4. createUsed : Substituted 1 with 0 &rarr; KILLED<br/>
+5. createUsed : changed conditional boundary &rarr; KILLED<br/>
+6. createUsed : removed conditional - replaced comparison check with true &rarr; KILLED<br/>
+7. createUsed : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+8. createUsed : negated conditional &rarr; KILLED<br/>
+9. createUsed : removed conditional - replaced comparison check with true &rarr; KILLED<br/>
+10. createUsed : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
 
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class='survived'>        if (conditionLevel &#60; 1 || conditionLevel &#62; 10)</span></pre></td></tr>
+<td class='covered'><pre><span  class='killed'>        if (conditionLevel &#60; 1 || conditionLevel &#62; 10)</span></pre></td></tr>
 
 
 <tr>
-<td class='uncovered'>
+<td class='covered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@568e814c_26'/>
 26
 </td>
-<td class='survived'>
+<td class='killed'>
 <span class='pop'>
 <a href='#grouporg.pitest.mutationtest.report.html.SourceFile@568e814c_26'>1</a>
 <span>
-1. createUsed : removed call to java/lang/IllegalArgumentException::&#60;init&#62; &rarr; NO_COVERAGE<br/>
+1. createUsed : removed call to java/lang/IllegalArgumentException::&#60;init&#62; &rarr; KILLED<br/>
 
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>            throw new IllegalArgumentException(&#34;conditionLevel must be between 1 and 10&#34;);</span></pre></td></tr>
+<td class='covered'><pre><span  class='killed'>            throw new IllegalArgumentException(&#34;conditionLevel must be between 1 and 10&#34;);</span></pre></td></tr>
 
 
 <tr>
@@ -428,36 +428,36 @@
 <a name='org.pitest.mutationtest.report.html.SourceFile@568e814c_27'/>
 27
 </td>
-<td class='survived'>
+<td class='killed'>
 <span class='pop'>
 <a href='#grouporg.pitest.mutationtest.report.html.SourceFile@568e814c_27'>4</a>
 <span>
-1. createUsed : removed conditional - replaced comparison check with false &rarr; SURVIVED<br/>
-2. createUsed : changed conditional boundary &rarr; SURVIVED<br/>
-3. createUsed : removed conditional - replaced comparison check with true &rarr; KILLED<br/>
-4. createUsed : negated conditional &rarr; KILLED<br/>
+1. createUsed : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+2. createUsed : removed conditional - replaced comparison check with true &rarr; KILLED<br/>
+3. createUsed : negated conditional &rarr; KILLED<br/>
+4. createUsed : changed conditional boundary &rarr; KILLED<br/>
 
 </span>
 </span>
 </td>
-<td class='covered'><pre><span  class='survived'>        if (numberOfPreviousOwners &#60; 0)</span></pre></td></tr>
+<td class='covered'><pre><span  class='killed'>        if (numberOfPreviousOwners &#60; 0)</span></pre></td></tr>
 
 
 <tr>
-<td class='uncovered'>
+<td class='covered'>
 <a name='org.pitest.mutationtest.report.html.SourceFile@568e814c_28'/>
 28
 </td>
-<td class='survived'>
+<td class='killed'>
 <span class='pop'>
 <a href='#grouporg.pitest.mutationtest.report.html.SourceFile@568e814c_28'>1</a>
 <span>
-1. createUsed : removed call to java/lang/IllegalArgumentException::&#60;init&#62; &rarr; NO_COVERAGE<br/>
+1. createUsed : removed call to java/lang/IllegalArgumentException::&#60;init&#62; &rarr; KILLED<br/>
 
 </span>
 </span>
 </td>
-<td class='uncovered'><pre><span  class='survived'>            throw new IllegalArgumentException(&#34;numberOfPreviousOwners must be &#62;= 0&#34;);</span></pre></td></tr>
+<td class='covered'><pre><span  class='killed'>            throw new IllegalArgumentException(&#34;numberOfPreviousOwners must be &#62;= 0&#34;);</span></pre></td></tr>
 
 
 <tr>
@@ -578,7 +578,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@568e814c_25'/> 
 
-<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.item.impl.SapatilhasItemTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.item.impl.SapatilhasItemTest]/[method:getPriceCorrection()]</span></span> negated conditional &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>none</span></span> Substituted 10 with 11 &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>none</span></span> Substituted 1 with 0 &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.item.impl.SapatilhasItemTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.item.impl.SapatilhasItemTest]/[method:getPriceCorrection()]</span></span> removed conditional - replaced comparison check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.item.impl.SapatilhasItemTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.item.impl.SapatilhasItemTest]/[method:getPriceCorrection()]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>8.<span><b>8</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.item.impl.SapatilhasItemTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.item.impl.SapatilhasItemTest]/[method:getPriceCorrection()]</span></span> negated conditional &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>9.<span><b>9</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>none</span></span> removed conditional - replaced comparison check with true &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>10.<span><b>10</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>none</span></span> removed conditional - replaced comparison check with false &rarr; SURVIVED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> Substituted 10 with 11 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> Substituted 1 with 0 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> removed conditional - replaced comparison check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>8.<span><b>8</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>9.<span><b>9</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> removed conditional - replaced comparison check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>10.<span><b>10</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -588,7 +588,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@568e814c_26'/> 
 
-<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>none</span></span> removed call to java/lang/IllegalArgumentException::&#60;init&#62; &rarr; NO_COVERAGE</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> removed call to java/lang/IllegalArgumentException::&#60;init&#62; &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -598,7 +598,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@568e814c_27'/> 
 
-<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>none</span></span> removed conditional - replaced comparison check with false &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.item.impl.SapatilhasItemTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.item.impl.SapatilhasItemTest]/[method:getPriceCorrection()]</span></span> removed conditional - replaced comparison check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.item.impl.SapatilhasItemTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.item.impl.SapatilhasItemTest]/[method:getPriceCorrection()]</span></span> negated conditional &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> removed conditional - replaced comparison check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> changed conditional boundary &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -608,7 +608,7 @@
 
 <a name='grouporg.pitest.mutationtest.report.html.SourceFile@568e814c_28'/> 
 
-<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>none</span></span> removed call to java/lang/IllegalArgumentException::&#60;init&#62; &rarr; NO_COVERAGE</p> 
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>createUsed<br/><b>Killed by : </b>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()]</span></span> removed call to java/lang/IllegalArgumentException::&#60;init&#62; &rarr; KILLED</p> 
 </td>
 </tr>
 <tr>
@@ -658,7 +658,7 @@
 
 <h2>Tests examined</h2>
 <ul>
-<li>com.marketplace.vintage.item.impl.SapatilhasItemTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.item.impl.SapatilhasItemTest]/[method:getPriceCorrection()] (0 ms)</li><li>com.marketplace.vintage.item.impl.TshirtItemTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.item.impl.TshirtItemTest]/[method:getPriceCorrection()] (0 ms)</li><li>com.marketplace.vintage.order.OrderFactoryTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.order.OrderFactoryTest]/[method:buildOrder()] (48 ms)</li>
+<li>com.marketplace.vintage.carrier.ItemConditionsTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.carrier.ItemConditionsTest]/[method:createUsedTest()] (6 ms)</li><li>com.marketplace.vintage.item.impl.SapatilhasItemTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.item.impl.SapatilhasItemTest]/[method:getPriceCorrection()] (0 ms)</li><li>com.marketplace.vintage.item.impl.TshirtItemTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.item.impl.TshirtItemTest]/[method:getPriceCorrection()] (0 ms)</li><li>com.marketplace.vintage.order.OrderFactoryTest.[engine:junit-jupiter]/[class:com.marketplace.vintage.order.OrderFactoryTest]/[method:buildOrder()] (49 ms)</li>
 </ul>
 
 <br/>
