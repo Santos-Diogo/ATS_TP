@@ -78,6 +78,21 @@
                         <version>1.2.1</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <targetClasses>
+                        <param>com.marketplace.vintage.*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>com.marketplace.vintage.*</param>
+                    </targetTests>
+                    <mutators>
+                        <mutator>ALL</mutator>
+                    </mutators>
+                    <outputFormats>
+                        <param>XML</param>
+                        <param>HTML</param>
+                    </outputFormats>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
