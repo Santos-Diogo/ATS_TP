@@ -1,6 +1,6 @@
 package com.marketplace.vintage.carrier;
 import org.junit.jupiter.api.Test;
-import com.marketplace.vintage.item.condition.ItemConditions;
+import org.junit.jupiter.api.Test;
 
 import static com.marketplace.vintage.item.condition.ItemConditions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
