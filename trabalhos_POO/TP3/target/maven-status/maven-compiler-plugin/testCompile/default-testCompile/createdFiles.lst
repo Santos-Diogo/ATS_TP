@@ -3,14 +3,17 @@ com/marketplace/vintage/command/CommandManagerTest$2.class
 com/marketplace/vintage/questionnaire/QuestionnaireTest.class
 com/marketplace/vintage/user/UserTest.class
 com/marketplace/vintage/order/OrderTest.class
+com/marketplace/vintage/item/ItemTest.class
 com/marketplace/vintage/persistent/PersistentManagerTest.class
 com/marketplace/vintage/user/UserManagerTest.class
 com/marketplace/vintage/command/CommandManagerTest$1.class
+com/marketplace/vintage/carrier/ItemConditionsTest.class
 com/marketplace/vintage/carrier/ParcelCarrierManagerTest.class
 com/marketplace/vintage/item/impl/MalaItemTest.class
 com/marketplace/vintage/item/impl/TshirtItemTest.class
 com/marketplace/vintage/command/CommandManagerTest.class
 com/marketplace/vintage/utils/StringUtilsTest.class
+com/marketplace/vintage/carrier/NormalParcelCarrierTest.class
 com/marketplace/vintage/expression/Exp4jExpressionSolverTest.class
 com/marketplace/vintage/item/impl/SapatilhasItemTest.class
 com/marketplace/vintage/item/ItemManagerTest.class

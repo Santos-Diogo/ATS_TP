@@ -1,12 +1,12 @@
 package com.marketplace.vintage.item;
 
-import com.marketplace.vintage.item.condition.ItemCondition;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 import java.util.UUID;
+import com.marketplace.vintage.item.condition.ItemCondition;
+
 
 public abstract class Item implements Serializable {
 
@@ -91,7 +91,6 @@ public abstract class Item implements Serializable {
         return getCurrentStock() == item.getCurrentStock() &&
                 Objects.equals(getOwnerUuid(), item.getOwnerUuid()) &&
                 Objects.equals(getAlphanumericId(), item.getAlphanumericId()) &&
-                Objects.equals(getItemCondition(), item.getItemCondition()) &&
                 Objects.equals(getDescription(), item.getDescription()) &&
                 Objects.equals(getBrand(), item.getBrand()) &&
                 Objects.equals(getBasePrice(), item.getBasePrice()) &&
@@ -115,6 +114,7 @@ public abstract class Item implements Serializable {
      */
     public abstract BigDecimal getPriceCorrection(int currentYear);
 
+    @Override
     public abstract Item clone();
 
 }
