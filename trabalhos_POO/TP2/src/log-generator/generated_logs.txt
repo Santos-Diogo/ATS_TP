@@ -1,0 +1,10 @@
+15:05:2023,1,Comprar,Sapatilha,BjHD2mTxSs,if31zc8pzn,376,True,97,XL,preto,2021
+15:05:2023,2,Vender,Mala,3JBay5LWho,NVBObZNrKt,368,True,90,S,vermelho,2011
+15:05:2023,2,Vender,T-shirt, IxFH0gyOa,nV6AgggPrP,115,False,43,M,azul,2001
+15:05:2023,2,Vender,Mala, QGRqXEzci,C8gQ270mes,227,False,37,L,preto,2008
+15:05:2023,1,Comprar,Mala,lXwGTfQnjw,WpOI9McHXA,406,True,33,L,preto,2000
+15:05:2023,1,Comprar,Mala,lbOQy30pWb,JqpwMtFtCV,67,True,57,L,preto,2020
+15:05:2023,1,Comprar,T-shirt,WAf26giz5r,mKJUKNT aq,324,True,47,L,branco,2017,hdk8NORlrd
+15:05:2023,2,Vender,T-shirt,ad2X8Nt6da,rJU085GJsI,370,True,45,XL,preto,2022,ocBMSiTOgH
+15:05:2023,2,Vender,Sapatilha,z3h2BuEQEq,A2PemkAyrB,49,True,28,L,vermelho,2020
+15:05:2023,1,Comprar,Sapatilha,HupbDXTuW2,aBfv1Gu Nl,69,True,11,L,preto,2020

@@ -10,6 +10,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <targetFolder>src/test/java</targetFolder>
     </properties>
 
     <dependencies>
@@ -53,6 +54,18 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.pholser</groupId>
+            <artifactId>junit-quickcheck-core</artifactId>
+            <version>0.9.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.13</version> <!-- Verifique a última versão disponível -->
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
@@ -73,14 +86,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Test.java</include>
-                        <include>**/*Tests.java</include>
-                    </includes>
-                    <forkCount>1</forkCount>
-                    <reuseForks>true</reuseForks>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
@@ -141,10 +146,6 @@
                         <configuration>
                             <source>8</source>
                             <target>8</target>
-                            <includes>
-                                <include>**/*Test.java</include>
-                                <include>**/*Tests.java</include>
-                            </includes>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -161,10 +162,6 @@
                         <configuration>
                             <source>8</source>
                             <target>8</target>
-                            <includes>
-                                <include>**/*Test.java</include>
-                                <include>**/*Tests.java</include>
-                            </includes>
                         </configuration>
                     </plugin>
                 </plugins>
